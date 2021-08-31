@@ -31,4 +31,28 @@ public class TopicService {
     public void addTopic(Topic topic) {
         TOPICS.add(topic);
     }
+
+    public void updateTopic(String id, Topic topic) {
+        // Go through each of the data
+        for (int i =0; i<TOPICS.size(); i++) {
+            Topic t = TOPICS.get(i);
+            // If the accessing data's id is start to the id passed in
+            if (t.getId().equals(id)) {
+                TOPICS.set(i, topic);
+                return;
+            }
+        }
+    }
+
+    public Topic deleteTopic(String id) {
+        Topic temp = null;
+        for (int i = 0; i < TOPICS.size(); i++) {
+            Topic t = TOPICS.get(i);
+            if (t.getId().equals(id)) {
+                temp = t;
+                TOPICS.remove(t);
+            }
+        }
+        return temp;
+    }
 }
