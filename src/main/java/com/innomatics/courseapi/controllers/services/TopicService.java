@@ -1,5 +1,7 @@
 
 package com.innomatics.courseapi.controllers.services;
+import com.innomatics.courseapi.controllers.repository.TopicRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.innomatics.courseapi.controllers.topic.Topic;
@@ -11,6 +13,9 @@ import java.util.List;
 
 @Service
 public class TopicService {
+     // IoC ---> Inversion of Control
+    @Autowired
+    private TopicRepository topicRepository;
 
     // Singleton - Block of data
     private List<Topic> TOPICS = new ArrayList<>(Arrays.asList(
@@ -21,7 +26,10 @@ public class TopicService {
     ));
     // Logical Part of the App
     public List<Topic> getAllTopic() {
-        return TOPICS;
+        List<Topic> topics = new ArrayList<>();
+        topicRepository.findAll().forEach(topics::add);
+        return topics;
+        //return TOPICS;
     }
 
     public Topic getTopic(String id) {
@@ -29,7 +37,7 @@ public class TopicService {
     }
 
     public void addTopic(Topic topic) {
-        TOPICS.add(topic);
+        topicRepository.save(topic);
     }
 
     public void updateTopic(String id, Topic topic) {

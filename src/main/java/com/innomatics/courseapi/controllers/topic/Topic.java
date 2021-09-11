@@ -1,7 +1,12 @@
 package com.innomatics.courseapi.controllers.topic;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class Topic {
     // Attribute
+    @Id
     private String id;
     private String name;
     private String description;
